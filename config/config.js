@@ -32,6 +32,7 @@ module.exports = {
    * @optional
    */
   styles: ['./styles/pwnd.less'],
+  defaultColor: 'light-blue',
   /**
    * Provide custom component logic and template for rendering the integration details block.  If you do not
    * provide a custom template and/or component then the integration will display data as a table of key value
@@ -99,7 +100,7 @@ module.exports = {
       name: 'API Key',
       description: 'HaveIBeenPwnd API Key',
       default: '',
-      type: 'text',
+      type: 'password',
       userCanEdit: true,
       adminOnly: false
     }
