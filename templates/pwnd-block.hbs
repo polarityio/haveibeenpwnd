@@ -1,133 +1,84 @@
-<div class="p-non-exfoliate-outer-padding">
-{{#each details as |object|}}
-
+{{#each details as |object index|}}
+  {{#if (gt index 0)}}
+    <hr>
+  {{/if}}
   <h1 class="p-title">
-      {{fa-icon "eye" fixedWidth=true}}  {{object.Name}} Breach
+      {{fa-icon "user-secret" fixedWidth=true}} Breach #{{inc index}}: {{object.Name}}
   </h1>
-
-  <div>
-      <span class="p-key">PWND Count: </span>
-      <span class="p-value">{{object.PwnCount}}</span>
-  </div>
-
-  <div>
-      <span class="p-key">Domain of Breach: </span>
-      <span class="p-value">{{object.Domain}}</span>
-  </div>
-
-  <div>
-      <span class="p-key">PWND Date: </span>
-      <span class="p-value">{{object.BreachDate}}</span>
-  </div>
-
-  <div>
-      <span class="p-key">Date Added to HaveIBeenPwnd: </span>
-      <span class="p-value">{{object.AddedDate}}</span>
-  </div>
-
-  <div>
-      <span class="p-key">Date Modified in HaveIBeenPwnd: </span>
-      <span class="p-value">{{object.ModifiedDate}}</span>
-  </div>
-
-<div>
-  <span class="p-title"> Description of {{object.Name}} Breach </span>
-</div>
-
-  <div>
-      <span class="p-key">Pwn Breach Description: </span>
-      <span class="p-value">{{object.Description}}%</span>
-  </div>
-
-  {{#if object.DataClasses}}
-  <div>
-    <span class="p-title">{{object.Name}} Data Classes</span>
-  </div>
-
-  {{#each object.DataClasses as |classes|}}
-  <div>
-      <li><span class="p-value">{{classes}}</span></li>
-  </div>
-  {{/each}}
+  {{#if object.Domain}}
+    <div>
+        <span class="p-key">Breach Domain: </span>
+        <span class="p-value">{{object.Domain}}</span>
+    </div>
   {{/if}}
-
-  <div>
-    <span class="p-title">{{object.Name}} Breach Metadata</span>
-  </div>
-
+  {{#if object.PwnCount}}
+    <div>
+        <span class="p-key">PwnCount: </span>
+        <span class="p-value">{{object.PwnCount}}</span>
+    </div>
+  {{/if}}
+  {{#if object.BreachDate}}
+    <div>
+        <span class="p-key">Breach Date: </span>
+        <span class="p-value">{{object.BreachDate}}</span>
+    </div>
+  {{/if}}
+  {{#if object.AddedDate}}
+    <div>
+        <span class="p-key">Date Added: </span>
+        <span class="p-value">{{object.AddedDate}}</span>
+    </div>
+  {{/if}}
+  {{#if object.ModifiedDate}}
+    <div>
+        <span class="p-key">Date Modified: </span>
+        <span class="p-value">{{object.ModifiedDate}}</span>
+    </div>
+  {{/if}}
   {{#if object.IsVerified}}
-  <div>
-      <span class="p-key">Verified: </span>
-      <span class="p-value">{{object.IsVerified}}</span>
-  </div>
+    <div>
+        <span class="p-key">Verified: </span>
+        <span class="p-value"><b>YES</b></span>
+    </div>
   {{/if}}
-
   {{#if object.IsFabricated}}
-  <div>
-      <span class="p-key">Fabricated: </span>
-      <span class="p-value">{{object.IsFabricated}}</span>
-  </div>
+    <div>
+        <span class="p-key">Fabricated: </span>
+        <span class="p-value"><b>YES</b></span>
+    </div>
   {{/if}}
-
   {{#if object.IsSensitive}}
-  <div>
-      <span class="p-key">Sensitive: </span>
-      <span class="p-value">{{object.IsSensitive}}</span>
-  </div>
+    <div>
+        <span class="p-key">Sensitive: </span>
+        <span class="p-value"><b>YES</b></span>
+    </div>
   {{/if}}
-
   {{#if object.IsRetired}}
-  <div>
-      <span class="p-key">Retired: </span>
-      <span class="p-value">{{object.IsRetired}}</span>
-  </div>
+    <div>
+        <span class="p-key">Retired: </span>
+        <span class="p-value"><b>YES</b></span>
+    </div>
   {{/if}}
-
   {{#if object.IsSpamList}}
-  <div>
-      <span class="p-key">SpamList: </span>
-      <span class="p-value">{{object.IsSpamList}}</span>
-  </div>
+    <div>
+        <span class="p-key">SpamList: </span>
+        <span class="p-value"><b>YES</b></span>
+    </div>
   {{/if}}
-
-  <div>
-  <hr>
-  </div>
+  {{#if object.Description}}
+    <div>
+        <span class="p-key">Breach Description: </span>
+        <span class="p-value">{{{object.Description}}}</span>
+    </div>
+  {{/if}}
+  {{#if object.DataClasses}}
+    <h1 class="p-title">
+        {{fa-icon "list" fixedWidth=true}} Data Classes
+    </h1>
+    {{#each object.DataClasses as |classes|}}
+      <div>
+          <li><span class="p-value">{{classes}}</span></li>
+      </div>
+    {{/each}}
+  {{/if}}
 {{/each}}
-</div>
-
-{{#if block.entity}}
-  <span class="p-action view-more" {{action "toggleScanner"}}>
-    {{#if isShowingDiv}}
-        (Hide Polarity Metadata{{fa-icon "angle-up" fixedWidth=true}})
-    {{else}}
-        (View Polarity Metadata{{fa-icon "angle-down" fixedWidth=true}})
-    {{/if}}
-      </span>
-
-{{#if isShowingDiv}}
-<div>
-{{#if (eq block.entity.requestContext.requestType "OnDemand")}}
-  <div class="polarityMeta">
-    <span class="p-key">Request Type:</span>
-    <span class="p-value">{{block.entity.requestContext.requestType}}</span>
-  </div>
-{{/if}}
-
-{{#if block.entity.requestContext.windowTitle}}
-  <div class="polarityMeta">
-    <span class="p-key">Window Title:</span>
-    <span class="p-value">{{block.entity.requestContext.windowTitle}}</span>
-  </div>
-{{/if}}
-
-{{#if block.entity.requestContext.processName}}
-  <div>
-    <span class="p-key">Process Name:</span>
-    <span class="p-value">{{block.entity.requestContext.processName}}</span>
-  </div>
-{{/if}}
-
-</div>
-{{/if}}
-{{/if}}

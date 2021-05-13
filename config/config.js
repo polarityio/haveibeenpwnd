@@ -5,7 +5,7 @@ module.exports = {
    * @type String
    * @required
    */
-  name: 'HaveIBeenPwnd',
+  name: 'have i been pwned?',
   /**
    * The acronym that appears in the notification window when information from this integration
    * is displayed.  Note that the acronym is included as part of each "tag" in the summary information
@@ -22,7 +22,7 @@ module.exports = {
    * @type String
    * @optional
    */
-  description: 'Check if you have an email account that has been compromised in a data breach',
+  description: 'Queries emails in have i been pwnd?s dataset to determine wether or not an email has been involved in breaches',
   entityTypes: ['email'],
   /**
    * An array of style files (css or less) that will be included for your integration. Any styles specified in
@@ -88,8 +88,8 @@ module.exports = {
   options: [
     {
       key: 'url',
-      name: 'HaveIBeenPwnd URl',
-      description: 'URL for HaveIBeenPwnd',
+      name: 'have i been pwned? URL',
+      description: 'Base URL for have i been pwned? including the schema (i.e., https://)',
       default: 'https://haveibeenpwned.com',
       type: 'text',
       userCanEdit: false,
@@ -98,7 +98,7 @@ module.exports = {
     {
       key: 'apiKey',
       name: 'API Key',
-      description: 'HaveIBeenPwnd API Key',
+      description: 'have i been pwned? API Key',
       default: '',
       type: 'password',
       userCanEdit: true,
