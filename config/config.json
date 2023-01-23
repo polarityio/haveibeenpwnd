@@ -1,0 +1,59 @@
+{
+  "name": "have i been pwned?",
+  "acronym": "PWND",
+  "description": "Queries emails in have i been pwnd?s dataset to determine wether or not an email has been involved in breaches",
+  "entityTypes": [
+    "email"
+  ],
+  "styles": [
+    "./styles/pwnd.less"
+  ],
+  "defaultColor": "light-blue",
+  "block": {
+    "component": {
+      "file": "./components/pwnd-block.js"
+    },
+    "template": {
+      "file": "./templates/pwnd-block.hbs"
+    }
+  },
+  "summary": {
+    "component": {
+      "file": "./components/pwnd-summary.js"
+    },
+    "template": {
+      "file": "./templates/pwnd-summary.hbs"
+    }
+  },
+  "request": {
+    "cert": "",
+    "key": "",
+    "passphrase": "",
+    "ca": "",
+    "proxy": "",
+    "rejectUnauthorized": true
+  },
+  "logging": {
+    "level": "info"
+  },
+  "options": [
+    {
+      "key": "url",
+      "name": "have i been pwned? URL",
+      "description": "Base URL for have i been pwned? including the schema (i.e., https://)",
+      "default": "https://haveibeenpwned.com",
+      "type": "text",
+      "userCanEdit": false,
+      "adminOnly": true
+    },
+    {
+      "key": "apiKey",
+      "name": "API Key",
+      "description": "have i been pwned? API Key",
+      "default": "",
+      "type": "password",
+      "userCanEdit": true,
+      "adminOnly": false
+    }
+  ]
+}
