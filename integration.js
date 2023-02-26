@@ -14,7 +14,7 @@ let requestDefault;
  * @param options
  * @param cb
  */
-function doLookup (entities, options, cb) {
+function doLookup(entities, options, cb) {
   let lookupResults = [];
   let tasks = [];
 
@@ -95,7 +95,7 @@ function doLookup (entities, options, cb) {
         lookupResults.push({
           entity: result.entity,
           data: {
-            summary: [],
+            summary: [`Breach Count: ${result.body.length}`],
             details: result.body
           }
         });
@@ -108,14 +108,14 @@ function doLookup (entities, options, cb) {
   });
 }
 
-function _isMiss (body) {
+function _isMiss(body) {
   if (body && Array.isArray(body) && body.length === 0) {
     return true;
   }
   return false;
 }
 
-function startup (logger) {
+function startup(logger) {
   Logger = logger;
 
   let defaults = {};
@@ -143,7 +143,7 @@ function startup (logger) {
   requestDefault = request.defaults(defaults);
 }
 
-function validateOptions (userOptions, cb) {
+function validateOptions(userOptions, cb) {
   let errors = [];
   if (
     typeof userOptions.apiKey.value !== 'string' ||
