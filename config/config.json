@@ -17,14 +17,6 @@
       "file": "./templates/pwnd-block.hbs"
     }
   },
-  "summary": {
-    "component": {
-      "file": "./components/pwnd-summary.js"
-    },
-    "template": {
-      "file": "./templates/pwnd-summary.hbs"
-    }
-  },
   "request": {
     "cert": "",
     "key": "",

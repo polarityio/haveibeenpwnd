@@ -1,84 +1,98 @@
 {{#each details as |object index|}}
-  {{#if (gt index 0)}}
-    <hr>
-  {{/if}}
-  <h1 class="p-title">
-      {{fa-icon "user-secret" fixedWidth=true}} Breach #{{inc index}}: {{object.Name}}
-  </h1>
-  {{#if object.Domain}}
-    <div>
+  <div id={{concat "text-container-" index}}>
+    {{#if (gt index 0)}}
+      <hr />
+    {{/if}}
+    <div class="d-flex align-items-center justify-content-end copy-btn-container">
+      <button class="btn copy-btn p-action" {{action "copyData" index}} title="Copied Information to Clipboard">
+        {{fa-icon icon="clipboard" fixedWidth=true}}
+      </button>
+      <div class="copy-success-message {{if showCopyMessage "visible" "hidden"}}">
+        {{fa-icon icon="check" fixedWidth=true class="copy-success-icon"}}
+        Copied Information.
+      </div>
+    </div>
+    <h1 class="p-title">
+      {{fa-icon "user-secret" fixedWidth=true}}
+      Breach #{{inc index}}:
+      {{object.Name}}
+    </h1>
+    {{#if object.Domain}}
+      <div>
         <span class="p-key">Breach Domain: </span>
         <span class="p-value">{{object.Domain}}</span>
-    </div>
-  {{/if}}
-  {{#if object.PwnCount}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.PwnCount}}
+      <div>
         <span class="p-key">PwnCount: </span>
         <span class="p-value">{{object.PwnCount}}</span>
-    </div>
-  {{/if}}
-  {{#if object.BreachDate}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.BreachDate}}
+      <div>
         <span class="p-key">Breach Date: </span>
         <span class="p-value">{{object.BreachDate}}</span>
-    </div>
-  {{/if}}
-  {{#if object.AddedDate}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.AddedDate}}
+      <div>
         <span class="p-key">Date Added: </span>
         <span class="p-value">{{object.AddedDate}}</span>
-    </div>
-  {{/if}}
-  {{#if object.ModifiedDate}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.ModifiedDate}}
+      <div>
         <span class="p-key">Date Modified: </span>
         <span class="p-value">{{object.ModifiedDate}}</span>
-    </div>
-  {{/if}}
-  {{#if object.IsVerified}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.IsVerified}}
+      <div>
         <span class="p-key">Verified: </span>
         <span class="p-value"><b>YES</b></span>
-    </div>
-  {{/if}}
-  {{#if object.IsFabricated}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.IsFabricated}}
+      <div>
         <span class="p-key">Fabricated: </span>
         <span class="p-value"><b>YES</b></span>
-    </div>
-  {{/if}}
-  {{#if object.IsSensitive}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.IsSensitive}}
+      <div>
         <span class="p-key">Sensitive: </span>
         <span class="p-value"><b>YES</b></span>
-    </div>
-  {{/if}}
-  {{#if object.IsRetired}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.IsRetired}}
+      <div>
         <span class="p-key">Retired: </span>
         <span class="p-value"><b>YES</b></span>
-    </div>
-  {{/if}}
-  {{#if object.IsSpamList}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if object.IsSpamList}}
+      <div>
         <span class="p-key">SpamList: </span>
         <span class="p-value"><b>YES</b></span>
-    </div>
-  {{/if}}
-  {{#if object.Description}}
-    <div>
-        <span class="p-key">Breach Description: </span>
-        <span class="p-value">{{{object.Description}}}</span>
-    </div>
-  {{/if}}
-  {{#if object.DataClasses}}
-    <h1 class="p-title">
-        {{fa-icon "list" fixedWidth=true}} Data Classes
-    </h1>
-    {{#each object.DataClasses as |classes|}}
-      <div>
-          <li><span class="p-value">{{classes}}</span></li>
       </div>
-    {{/each}}
-  {{/if}}
+    {{/if}}
+    {{#if object.Description}}
+      <div>
+        <span class="p-key">Breach Description: </span>
+        <span class="p-block">{{{object.Description}}}</span>
+      </div>
+    {{/if}}
+    {{#if object.DataClasses}}
+      <h1 class="p-title">
+        {{fa-icon "list" fixedWidth=true}}
+        Data Classes
+      </h1>
+      {{#each object.DataClasses as |classes|}}
+        <div>
+          <li><span class="p-value">{{classes}}</span></li>
+        </div>
+      {{/each}}
+    {{/if}}
+  </div>
 {{/each}}

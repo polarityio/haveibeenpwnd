@@ -22,7 +22,8 @@ module.exports = {
    * @type String
    * @optional
    */
-  description: 'Queries emails in have i been pwnd?s dataset to determine wether or not an email has been involved in breaches',
+  description:
+    "Queries emails in have i been pwnd's dataset to determine whether or not an email has been involved in breaches",
   entityTypes: ['email'],
   /**
    * An array of style files (css or less) that will be included for your integration. Any styles specified in
@@ -47,14 +48,6 @@ module.exports = {
     },
     template: {
       file: './templates/pwnd-block.hbs'
-    }
-  },
-  summary: {
-    component: {
-      file: './components/pwnd-summary.js'
-    },
-    template: {
-      file: './templates/pwnd-summary.hbs'
     }
   },
   request: {
