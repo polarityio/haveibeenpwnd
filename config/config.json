@@ -3,12 +3,8 @@
   "name": "have i been pwned?",
   "acronym": "PWND",
   "description": "Queries emails in have i been pwnd?s dataset to determine wether or not an email has been involved in breaches",
-  "entityTypes": [
-    "email"
-  ],
-  "styles": [
-    "./styles/pwnd.less"
-  ],
+  "entityTypes": ["email"],
+  "styles": ["./styles/pwnd.less"],
   "defaultColor": "light-blue",
   "block": {
     "component": {
@@ -26,7 +22,7 @@
     "proxy": ""
   },
   "logging": {
-    "level": "info"
+    "level": "trace"
   },
   "options": [
     {
@@ -46,6 +42,24 @@
       "type": "password",
       "userCanEdit": true,
       "adminOnly": false
+    },
+    {
+      "key": "maxConcurrent",
+      "name": "Max Concurrent Search Requests",
+      "description": "Maximum number of concurrent search requests (defaults to 10).  Integration must be restarted after changing this option.",
+      "default": 10,
+      "type": "number",
+      "userCanEdit": false,
+      "adminOnly": true
+    },
+    {
+      "key": "minTime",
+      "name": "Minimum Time Between Searches",
+      "description": "Minimum amount of time in milliseconds between each entity search (defaults to 25).  Integration must be restarted after changing this option.",
+      "default": 25,
+      "type": "number",
+      "userCanEdit": false,
+      "adminOnly": true
     }
   ]
 }
