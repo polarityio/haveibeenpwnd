@@ -1,5 +1,3 @@
-const { getLogger } = require('./logger');
-
 class PolarityResult {
   createEmptyBlock(entity) {
     return {
@@ -28,16 +26,15 @@ class PolarityResult {
     };
   }
 
-  retryablePolarityResponse = (entity) => {
+  retryablePolarityResponse = (apiResponse) => {
     return {
-      entity,
-      isVolatile: true,
+      entity: apiResponse.entity,
       data: {
         summary: ['Lookup limit reached'],
         details: {
+          allowRetry: true,
           summaryTag: 'Lookup limit reached',
-          errorMessage:
-            'A temporary haveIbeenPwned API search limit was reached. You can retry your search by pressing the "Retry Search" button.'
+          errorMessage: `${apiResponse.result.body.message}`
         }
       }
     };

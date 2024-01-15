@@ -1,3 +1,16 @@
+{{#if details.allowRetry}}
+  <div class='error-container'>
+    <span class='error-message'>{{details.errorMessage}}</span>
+    <button type='button' class='p-btn btn btn-sm btn-polarity retry-btn' {{action 'retryLookup'}}>
+      {{#if running}}
+        {{fa-icon icon='spinner-third' fixedWidth=true spin=true}}
+      {{else}}
+        Retry Search
+      {{/if}}
+    </button>
+  </div>
+{{/if}}
+
 {{#each details as |object index|}}
   <div id={{concat 'text-container-' index}}>
     {{#if (gt index 0)}}

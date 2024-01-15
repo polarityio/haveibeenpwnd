@@ -17,7 +17,7 @@ pre {
   padding-top: 5px;
 }
 
-.p-block{
+.p-block {
   word-wrap: break-word;
   word-break: break-word;
 }
@@ -67,4 +67,33 @@ li {
       transition: visibility 0s 0.25s, opacity 0.25s linear;
     }
   }
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.error-message {
+  font-size: 12px; /* Adjust the font size to be smaller */
+  background-color: #ffdddd; /* Light red background color */
+  color: #555; /* Grey font color */
+  padding: 15px 20px; /* Increased padding for the message */
+  border-radius: 5px; /* Rounded edges */
+  margin-bottom: 10px;
+}
+
+.retry-btn {
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+  left: 0; /* Position the button on the left side */
+}
+
+.retry-btn:active {
+  color: darken(#388e3c, 5%);
 }

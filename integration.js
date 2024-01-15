@@ -10,6 +10,7 @@ const { PolarityResult } = require('./src/create-result-object');
 const { NetworkError, ApiRequestError, AuthRequestError, RetryRequestError } = require('./src/errors');
 
 const RETRY_REQUEST = 429;
+const SUCCESS = 200;
 let retryCount = 0;
 
 let limiter;
@@ -38,6 +39,7 @@ function _setupLimiter(options) {
  * @param {Function} cb - Callback function.
  */
 async function doLookup(entities, options, cb) {
+  const Logger = getLogger();
   polarityRequest.setOptions(options);
   polarityRequest.setHeader('hibp-api-key', options.apiKey);
   polarityRequest.setHeader('User-Agent', 'Polarity');
@@ -47,11 +49,11 @@ async function doLookup(entities, options, cb) {
   try {
     const response = await limiter.schedule(_search, entities);
 
-    getLogger().trace({ response }, 'Response from API');
-
     const polarityResult = new PolarityResult();
+
     const lookupResults = response[0].map((apiResponse) => {
-      if (_.size(apiResponse.result.body)) {
+      const Logger = getLogger();
+      if (_.size(apiResponse.result.body) && apiResponse.result.statusCode === SUCCESS) {
         return polarityResult.createResultsObject(apiResponse);
       }
 
@@ -59,15 +61,18 @@ async function doLookup(entities, options, cb) {
         return polarityResult.createNoResultsObject(apiResponse.entity);
       }
 
-      if (apiResponse.statusCode === RETRY_REQUEST && retryCount < 3) {
+      if (apiResponse.result.statusCode === RETRY_REQUEST && retryCount < 3) {
         retryCount++;
         if (retryCount === 3) {
+          Logger.trace({ retryCount }, 'Retry Count');
           throw new RetryRequestError('Retry limit reached');
         }
+        Logger.trace({ apiResponse }, 'Retry RequestAAA');
         return polarityResult.retryablePolarityResponse(apiResponse);
       }
     });
 
+    Logger.trace({ lookupResults }, 'Lookup Results');
     return cb(null, lookupResults);
   } catch (err) {
     const error = parseErrorToReadableJSON(err);
@@ -102,6 +107,8 @@ function validateOptions(userOptions, cb) {
 }
 
 async function onMessage(payload, options, cb) {
+  const Logger = getLogger();
+
   switch (payload.action) {
     case 'retry':
       doLookup([payload.entity], options, (err, lookupResults) => {
@@ -109,6 +116,7 @@ async function onMessage(payload, options, cb) {
           Logger.error({ err }, 'Error retrying lookup');
           cb(err);
         } else {
+          Logger.trace({ lookupResults }, 'Retry Lookup Results_CCC');
           cb(
             null,
             lookupResults && lookupResults[0] && lookupResults[0].data === null

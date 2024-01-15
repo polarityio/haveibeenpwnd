@@ -88,8 +88,7 @@ class PolarityRequest {
 
     return new Promise((resolve, reject) => {
       this.requestWithDefaults(requestOptions, async (err, response) => {
-        // const statusCode = response.statusCode;
-        const statusCode = 429;
+        const statusCode = response.statusCode;
 
         if (
           statusCode === HTTP_CODE_SUCCESS_200 ||
