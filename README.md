@@ -11,10 +11,20 @@ To learn more about have i been pwned?, please visit: [official website](https:/
 ## have i been pwned? Integration Options
 
 ### have i been pwned? URL
+
 Base URL for have i been pwned?, the default is https://haveibeenpwned.com.
 
 ### have i been pwned? API Key
+
 Valid API Key for have i been pwned?
+
+### Max Concurrent Search Requests
+
+Maximum number of concurrent search requests (defaults to 10). Integration must be restarted after changing this option.
+
+### Minimum Time Between Searches
+
+Minimum amount of time in milliseconds between each entity search (defaults to 25). Integration must be restarted after changing this option.
 
 ## Installation Instructions
 
@@ -22,6 +32,6 @@ Installation instructions for integrations are provided on the [PolarityIO GitHu
 
 ## Polarity
 
-Polarity is a memory-augmentation platform that improves and accelerates analyst decision making.  For more information about the Polarity platform please see:
+Polarity is a memory-augmentation platform that improves and accelerates analyst decision making. For more information about the Polarity platform please see:
 
 https://polarity.io/

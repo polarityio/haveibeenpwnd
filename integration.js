@@ -25,10 +25,10 @@ function startup(logger) {
  */
 function _setupLimiter(options) {
   limiter = new Bottleneck({
-    maxConcurrent: 10, // No more than 10 concurrent requests
+    maxConcurrent: Number.parseInt(options.maxConcurrent, 10), // No more than 10 concurrent requests
     highWater: 50, // No more than 50 lookups can be queued up
     strategy: Bottleneck.strategy.OVERFLOW,
-    minTime: 10 // Minimum time between requests
+    minTime: Number.parseInt(options.minTime, 10) // Minimum time between requests
   });
 }
 
@@ -64,10 +64,8 @@ async function doLookup(entities, options, cb) {
       if (apiResponse.result.statusCode === RETRY_REQUEST && retryCount < 3) {
         retryCount++;
         if (retryCount === 3) {
-          Logger.trace({ retryCount }, 'Retry Count');
           throw new RetryRequestError('Retry limit reached');
         }
-        Logger.trace({ apiResponse }, 'Retry RequestAAA');
         return polarityResult.retryablePolarityResponse(apiResponse);
       }
     });
