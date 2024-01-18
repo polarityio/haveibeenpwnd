@@ -8,13 +8,25 @@ Check out the integration below:
 
 To learn more about have i been pwned?, please visit: [official website](https://haveibeenpwned.com)
 
+
 ## have i been pwned? Integration Options
 
 ### have i been pwned? URL
-Base URL for have i been pwned?, the default is https://haveibeenpwned.com.
+Base URL for have i been pwned? including the schema (i.e., https://)
 
-### have i been pwned? API Key
-Valid API Key for have i been pwned?
+### API Key
+have i been pwned? API Key
+
+### Max Concurrent Search Requests
+Maximum number of concurrent search requests (defaults to 1).
+The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds.
+Integration must be restarted after changing this option.
+
+### Minimum Time Between Searches
+Minimum amount of time in milliseconds between each entity search (defaults to 6000).
+The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds.
+Integration must be restarted after changing this option.
+
 
 ## Installation Instructions
 

@@ -5,7 +5,7 @@ module.exports = {
    * @type String
    * @required
    */
-  name: 'have i been pwned?',
+  name: 'have i been pwned?1',
   /**
    * The acronym that appears in the notification window when information from this integration
    * is displayed.  Note that the acronym is included as part of each "tag" in the summary information
@@ -15,7 +15,7 @@ module.exports = {
    * @type String
    * @required
    */
-  acronym: 'PWND',
+  acronym: 'PWND1',
   /**
    * Description for this integration which is displayed in the Polarity integrations user interface
    *
@@ -32,22 +32,14 @@ module.exports = {
    * @type Array
    * @optional
    */
-  styles: ['./styles/pwnd.less'],
   defaultColor: 'light-blue',
-  /**
-   * Provide custom component logic and template for rendering the integration details block.  If you do not
-   * provide a custom template and/or component then the integration will display data as a table of key value
-   * pairs.
-   *
-   * @type Object
-   * @optional
-   */
+  styles: ['./client/styles.less'],
   block: {
     component: {
-      file: './components/pwnd-block.js'
+      file: './client/block.js'
     },
     template: {
-      file: './templates/pwnd-block.hbs'
+      file: './client/block.hbs'
     }
   },
   request: {
@@ -65,7 +57,7 @@ module.exports = {
     ca: '',
     // An HTTP proxy to be used. Supports proxy Auth with Basic Auth, identical to support for
     // the url parameter (by embedding the auth info in the uri)
-    proxy: ""
+    proxy: ''
   },
   logging: {
     level: 'info' //trace, debug, info, warn, error, fatal
@@ -81,7 +73,8 @@ module.exports = {
     {
       key: 'url',
       name: 'have i been pwned? URL',
-      description: 'Base URL for have i been pwned? including the schema (i.e., https://)',
+      description:
+        'Base URL for have i been pwned? including the schema (i.e., https://)',
       default: 'https://haveibeenpwned.com',
       type: 'text',
       userCanEdit: false,
@@ -95,6 +88,26 @@ module.exports = {
       type: 'password',
       userCanEdit: true,
       adminOnly: false
+    },
+    {
+      key: 'maxConcurrent',
+      name: 'Max Concurrent Search Requests',
+      description:
+        "Maximum number of concurrent search requests (defaults to 1). The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds. Integration must be restarted after changing this option.",
+      default: 1,
+      type: 'number',
+      userCanEdit: false,
+      adminOnly: true
+    },
+    {
+      key: 'minTime',
+      name: 'Minimum Time Between Searches',
+      description:
+        "Minimum amount of time in milliseconds between each entity search (defaults to 2000).  The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds. Integration must be restarted after changing this option.",
+      default: 6000,
+      type: 'number',
+      userCanEdit: false,
+      adminOnly: true
     }
   ]
 };
