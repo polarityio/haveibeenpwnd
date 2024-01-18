@@ -14,17 +14,17 @@ const validateOptions = async (options, callback) => {
   const urlValidationError = validateUrlOption(options);
 
   const maxConcurrentError =
-    options.maxConcurrent.value < 1
+    options.maxConcurrentRequests.value < 1
       ? {
-          key: 'maxConcurrent',
+          key: 'maxConcurrentRequests',
           message: 'Max Concurrent Requests must be 1 or higher'
         }
       : [];
 
   const minTimeError =
-    options.minTime.value < 1
+    options.minimumMillisecondsRequestWillTake.value < 1
       ? {
-          key: 'maxConcurrent',
+          key: 'minimumMillisecondsRequestWillTake',
           message: 'Minimum Time Between Lookups must be 1 or higher'
         }
       : [];

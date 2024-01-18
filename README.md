@@ -19,12 +19,12 @@ have i been pwned? API Key
 
 ### Max Concurrent Search Requests
 Maximum number of concurrent search requests (defaults to 1).
-The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds.
+The default API Limit for 'have i been pwned?' is 1 search for every 2 seconds.
 Integration must be restarted after changing this option.
 
 ### Minimum Time Between Searches
-Minimum amount of time in milliseconds between each entity search (defaults to 6000).
-The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds.
+Minimum amount of time in milliseconds between each entity search (defaults to 2000).
+The default API Limit for 'have i been pwned?' is 1 search for every 2 seconds.
 Integration must be restarted after changing this option.
 
 

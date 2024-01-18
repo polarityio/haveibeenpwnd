@@ -90,21 +90,21 @@ module.exports = {
       adminOnly: false
     },
     {
-      key: 'maxConcurrent',
+      key: 'maxConcurrentRequests',
       name: 'Max Concurrent Search Requests',
       description:
-        "Maximum number of concurrent search requests (defaults to 1). The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds. Integration must be restarted after changing this option.",
+        "Maximum number of concurrent search requests (defaults to 1). The default API Limit for 'have i been pwned?' is 1 search for every 2 seconds. Integration must be restarted after changing this option.",
       default: 1,
       type: 'number',
       userCanEdit: false,
       adminOnly: true
     },
     {
-      key: 'minTime',
+      key: 'minimumMillisecondsRequestWillTake',
       name: 'Minimum Time Between Searches',
       description:
-        "Minimum amount of time in milliseconds between each entity search (defaults to 2000).  The default API Limit for 'have i been pwned?' is 1 search for every 6 seconds. Integration must be restarted after changing this option.",
-      default: 6000,
+        "Minimum amount of time in milliseconds between each entity search (defaults to 2000).  The default API Limit for 'have i been pwned?' is 1 search for every 2 seconds. Integration must be restarted after changing this option.",
+      default: 2000,
       type: 'number',
       userCanEdit: false,
       adminOnly: true
