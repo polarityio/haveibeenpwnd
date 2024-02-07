@@ -7,6 +7,27 @@ polarity.export = PolarityComponent.extend({
   retryFailedMessage: '',
   showCopyMessage: false,
   retryIsRunning: false,
+  pagedEmailBreaches: Ember.computed(
+    'block._state.paging.from',
+    'emailBreaches',
+    function () {
+      const from = +this.get('block._state.paging.from');
+      const size = this.get('block._state.paging.size');
+      return this.get('emailBreaches').slice(from, from + size);
+    }
+  ),
+  init() {
+    this._super(...arguments);
+
+    if (!this.get('block._state')) {
+      this.set('block._state', {});
+      this.set('block._state.paging', {
+        size: 10,
+        from: 0
+      });
+      this.updatePageParameters();
+    }
+  },
   actions: {
     copyData: function (index) {
       Ember.run.scheduleOnce(
@@ -15,13 +36,11 @@ polarity.export = PolarityComponent.extend({
         this.copyElementToClipboard,
         `text-container-${index}`
       );
-      Ember.run.scheduleOnce('destroy', this, this.restoreCopyState);
+      Ember.run.scheduleOnce('destroy', this, this.restoreCopyState, index);
     },
-    toggleScanner() {
-      this.toggleProperty('isShowingDiv');
-    },
-    toggleVisibility() {
-      this.toggleProperty('showEmail');
+    setPage(fromIndex) {
+      this.set('block._state.paging.from', fromIndex);
+      this.updatePageParameters();
     },
     retryLookup: function () {
       this.set('retryIsRunning', true);
@@ -33,6 +52,7 @@ polarity.export = PolarityComponent.extend({
         .then((result) => {
           if (result.data.summary) this.set('summary', result.summary);
           this.set('block.data', result.data);
+          this.updatePageParameters();
         })
         .catch((err) => {
           this.set('retryFailedMessage', JSON.stringify(err, null, 4));
@@ -41,6 +61,50 @@ polarity.export = PolarityComponent.extend({
           this.set('retryIsRunning', false);
           this.get('block').notifyPropertyChange('data');
         });
+    }
+  },
+  updatePageParameters() {
+    let from = +this.get('block._state.paging.from');
+    let size = this.get('block._state.paging.size');
+    let totalResults = this.get('emailBreaches.length');
+
+    if (totalResults <= size) {
+      this.set('block._state.paging.allResultsReturned', true);
+    }
+
+    this.set('block._state.paging.startItem', from + 1);
+    this.set(
+      'block._state.paging.endItem',
+      from + size + 1 > totalResults ? totalResults : from + size
+    );
+
+    const finalPagingIndex =
+      totalResults % size === 0
+        ? totalResults - size
+        : totalResults - (totalResults % size);
+    const nextPageIndex =
+      from + size >= totalResults - 1 ? finalPagingIndex : from + size;
+    const prevPageIndex = from - size < 0 ? 0 : from - size;
+    const firstPageIndex = 0;
+    const lastPageIndex = size < totalResults ? finalPagingIndex : 0;
+
+    this.set('block._state.paging.nextPageIndex', nextPageIndex);
+    this.set('block._state.paging.prevPageIndex', prevPageIndex);
+    this.set('block._state.paging.firstPageIndex', firstPageIndex);
+    this.set('block._state.paging.lastPageIndex', lastPageIndex);
+
+    // There are no more pages to show so we can disable the next buttons
+    if (this.get('block._state.paging.endItem') === totalResults) {
+      this.set('block._state.paging.disableNextButtons', true);
+    } else {
+      this.set('block._state.paging.disableNextButtons', false);
+    }
+
+    // There are no more pages to show so we can disable the prev buttons
+    if (this.get('block._state.paging.startItem') === 1) {
+      this.set('block._state.paging.disablePrevButtons', true);
+    } else {
+      this.set('block._state.paging.disablePrevButtons', false);
     }
   },
   copyElementToClipboard: function (element) {
@@ -62,12 +126,12 @@ polarity.export = PolarityComponent.extend({
     );
     return range;
   },
-  restoreCopyState: function () {
-    this.set('showCopyMessage', true);
+  restoreCopyState: function (index) {
+    this.set(`pagedEmailBreaches.${index}._showCopyMessage`, true);
 
     setTimeout(() => {
       if (!this.isDestroyed) {
-        this.set('showCopyMessage', false);
+        this.set(`pagedEmailBreaches.${index}._showCopyMessage`, false);
       }
     }, 2000);
   }

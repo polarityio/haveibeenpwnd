@@ -2,6 +2,23 @@
   padding: 5px;
 }
 
+.paging-bar {
+  position: sticky;
+  bottom: 0;
+  height: 25px;
+  background-color: red;
+  margin: -10px;
+}
+
+.breach-container {
+  position: relative;
+
+  &:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+
 pre {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -17,6 +34,7 @@ pre {
 .polarityMetadata {
   padding-bottom: 5px;
 }
+
 .polarityMeta {
   padding-top: 5px;
 }
@@ -34,7 +52,7 @@ li {
   flex: 1 1 auto;
   position: absolute;
   right: 10px;
-  top: 7px;
+  top: -3px;
 
   .copy-btn {
     font-size: 12px;
@@ -82,6 +100,7 @@ li {
   margin-bottom: 10px;
   background-color: #ffdddd;
   max-width: 300px;
+
   pre {
     margin: 0px;
     color: #555;
@@ -92,4 +111,34 @@ li {
 
 .retry-btn:active {
   color: darken(#388e3c, 5%);
+}
+
+.paging-container {
+  position: sticky;
+  bottom: 0;
+  background-color: #fff;
+  padding: 3px 15px 3px 15px;
+  box-shadow: 0px 0px 5px rgba(50, 50, 50, 0.2);
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: -10px;
+
+  button {
+    padding: 0 2px;
+    height: 20px;
+
+    &.naked {
+      color: #7bc942;
+      background-color: transparent;
+      border: none;
+    }
+
+    &:hover {
+      color: darken(#7bc942, 15%);
+    }
+
+    &:active {
+      color: darken(#7bc942, 30%);
+    }
+  }
 }
