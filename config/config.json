@@ -2,20 +2,16 @@
   "polarityIntegrationUuid": "cf2f39c0-cce1-11ed-aeee-075d3490155d",
   "name": "have i been pwned?",
   "acronym": "PWND",
-  "description": "Queries emails in have i been pwnd?s dataset to determine wether or not an email has been involved in breaches",
-  "entityTypes": [
-    "email"
-  ],
-  "styles": [
-    "./styles/pwnd.less"
-  ],
+  "description": "Queries emails in Have I Been Pwned's dataset to determine whether or not an email has been involved in breaches",
+  "entityTypes": ["email"],
   "defaultColor": "light-blue",
+  "styles": ["./client/styles.less"],
   "block": {
     "component": {
-      "file": "./components/pwnd-block.js"
+      "file": "./client/block.js"
     },
     "template": {
-      "file": "./templates/pwnd-block.hbs"
+      "file": "./client/block.hbs"
     }
   },
   "request": {
@@ -44,8 +40,26 @@
       "description": "have i been pwned? API Key",
       "default": "",
       "type": "password",
-      "userCanEdit": true,
-      "adminOnly": false
+      "userCanEdit": false,
+      "adminOnly": true
+    },
+    {
+      "key": "maxConcurrentRequests",
+      "name": "Max Concurrent Search Requests",
+      "description": "Maximum number of concurrent search requests (defaults to 1). The default API Limit for 'have i been pwned?' is 1 search for every 2 seconds. Integration must be restarted after changing this option.",
+      "default": 1,
+      "type": "number",
+      "userCanEdit": false,
+      "adminOnly": true
+    },
+    {
+      "key": "minimumMillisecondsRequestWillTake",
+      "name": "Minimum Time Between Searches",
+      "description": "Minimum amount of time in milliseconds between each entity search (defaults to 2000).  The default API Limit for 'have i been pwned?' is 1 search for every 2 seconds. Integration must be restarted after changing this option.",
+      "default": 2000,
+      "type": "number",
+      "userCanEdit": false,
+      "adminOnly": true
     }
   ]
 }
