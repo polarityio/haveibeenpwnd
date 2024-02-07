@@ -4,7 +4,7 @@ The Polarity have i been pwned? integration searches the have i been pwned? API 
 
 Check out the integration below:
 
-<img width="200" src="https://user-images.githubusercontent.com/22529325/62340636-3a7b9e80-b4ae-11e9-9aab-f727aef9964a.png">
+<img width="50%" src="images/overlay.png">
 
 To learn more about have i been pwned?, please visit: [official website](https://haveibeenpwned.com)
 
