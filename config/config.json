@@ -2,7 +2,7 @@
   "polarityIntegrationUuid": "cf2f39c0-cce1-11ed-aeee-075d3490155d",
   "name": "have i been pwned?",
   "acronym": "PWND",
-  "description": "Queries emails in have i been pwnd?s dataset to determine wether or not an email has been involved in breaches",
+  "description": "Queries emails in Have I Been Pwned's dataset to determine whether or not an email has been involved in breaches",
   "entityTypes": ["email"],
   "defaultColor": "light-blue",
   "styles": ["./client/styles.less"],

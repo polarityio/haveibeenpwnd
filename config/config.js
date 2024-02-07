@@ -23,7 +23,7 @@ module.exports = {
    * @optional
    */
   description:
-    "Queries emails in have i been pwnd's dataset to determine whether or not an email has been involved in breaches",
+    "Queries emails in Have I Been Pwned's dataset to determine whether or not an email has been involved in breaches",
   entityTypes: ['email'],
   /**
    * An array of style files (css or less) that will be included for your integration. Any styles specified in
