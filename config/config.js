@@ -5,7 +5,7 @@ module.exports = {
    * @type String
    * @required
    */
-  name: 'have i been pwned?1',
+  name: 'have i been pwned?',
   /**
    * The acronym that appears in the notification window when information from this integration
    * is displayed.  Note that the acronym is included as part of each "tag" in the summary information
@@ -15,7 +15,7 @@ module.exports = {
    * @type String
    * @required
    */
-  acronym: 'PWND1',
+  acronym: 'PWND',
   /**
    * Description for this integration which is displayed in the Polarity integrations user interface
    *
@@ -86,8 +86,8 @@ module.exports = {
       description: 'have i been pwned? API Key',
       default: '',
       type: 'password',
-      userCanEdit: true,
-      adminOnly: false
+      userCanEdit: false,
+      adminOnly: true
     },
     {
       key: 'maxConcurrentRequests',

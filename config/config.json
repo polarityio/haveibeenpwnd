@@ -40,8 +40,8 @@
       "description": "have i been pwned? API Key",
       "default": "",
       "type": "password",
-      "userCanEdit": true,
-      "adminOnly": false
+      "userCanEdit": false,
+      "adminOnly": true
     },
     {
       "key": "maxConcurrentRequests",
